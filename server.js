@@ -10,8 +10,8 @@ const port = 3000; // Change as needed
 
 // Configure AWS credentials and Polly
 AWS.config.update({
-  accessKeyId: 'AKIA3TFGENAQRJEUBC7G',
-  secretAccessKey: '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',
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: 'us-east-2'
 });
 
