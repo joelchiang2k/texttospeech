@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Text-To-Speech Converter</title>
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 80%;
+      height: 100px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: none;
+    }
+
+    label {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    select {
+      padding: 8px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    audio {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Text-To-Speech Converter</h1>
+  <textarea id="textToSpeak" rows="5" cols="50" placeholder="Enter text to convert"></textarea>
+  
+  <label for="voiceSelect">Select Voice:</label>
+  <select id="voiceSelect">
+    <option value="Joanna">Joanna</option>
+    <option value="Matthew">Matthew</option>
+    <option value="Ivy">Ivy</option>
+    <option value="Joey">Joey</option>
+    <option value="Justin">Justin</option>
+  </select>
+  
+  <button onclick="synthesizeSpeech()">Synthesize Speech</button>
+  <audio controls id="audioPlayer" style="display: none;"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
