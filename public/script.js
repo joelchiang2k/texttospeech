@@ -1,5 +1,3 @@
-// script.js
-
 function synthesizeSpeech() {
   const textToSpeak = document.getElementById('textToSpeak').value.trim();
   const selectedVoice = document.getElementById('voiceSelect').value;
@@ -10,6 +8,7 @@ function synthesizeSpeech() {
   }
 
   // Use fetch to send a request to your server or AWS Lambda
+  // Sending payload over to server
   fetch('/synthesize', {
     method: 'POST',
     headers: {

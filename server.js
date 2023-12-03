@@ -1,5 +1,3 @@
-// app.js
-
 const express = require('express');
 const AWS = require('aws-sdk');
 const bodyParser = require('body-parser');
@@ -21,20 +19,22 @@ const polly = new AWS.Polly();
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//post request sent from frontend
 app.post('/synthesize', async (req, res) => {
     const text = req.body.text;
-    const selectedVoice = req.body.voice || 'Joanna'; // Default to Joanna if voice not provided
-  
+    const selectedVoice = req.body.voice || 'Joanna'; 
     if (!text) {
       return res.status(400).json({ error: 'Text not provided' });
     }
-  
+    
+    //params sent from frontend
     const params = {
       OutputFormat: 'mp3',
       Text: text,
-      VoiceId: selectedVoice // Use the selected voice
+      VoiceId: selectedVoice
     };
-  
+    
+    //sends mpeg file to frontend to play
     try {
       const data = await polly.synthesizeSpeech(params).promise();
       res.set('Content-Type', 'audio/mpeg');
@@ -44,7 +44,8 @@ app.post('/synthesize', async (req, res) => {
       res.status(500).json({ error: 'Speech synthesis failed' });
     }
   });
-  
+
+//running port
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
