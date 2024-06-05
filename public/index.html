@@ -3,88 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <title>Text-To-Speech Converter</title>
-  <style>
-     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    h1 {
-      margin-bottom: 20px;
-    }
-
-    textarea {
-      width: 80%;
-      height: 100px;
-      padding: 10px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      resize: none;
-    }
-
-    label {
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    select {
-      padding: 8px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    audio {
-      margin-top: 20px;
-    }
-
-    #audioPlayer {
-      width: 300px; 
-      margin: 20px; 
-      background-color: #f5f5f5; 
-      border-radius: 5px; 
-      padding: 10px; 
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-    }
-
- 
-    #audioPlayer audio {
-      width: 100%; 
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Text-To-Speech Converter</h1>
   <textarea id="textToSpeak" rows="5" cols="50" placeholder="Enter text to convert"></textarea>
   
   <label for="voiceSelect">Select Voice:</label>
-  <select id="voiceSelect">
-    <option value="Joanna">Joanna</option>
-    <option value="Matthew">Matthew</option>
-    <option value="Ivy">Ivy</option>
-    <option value="Joey">Joey</option>
-    <option value="Justin">Justin</option>
+  <select id="voiceSelect" onchange="updateImage()">
+    <option value="Joanna" data-image="https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/PEOPLE_ICON-23-5121.png">Joanna</option>
+    <option value="Matthew" data-image="https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/iconfinder-1-avatar-2754574_120513.png">Matthew</option>
+    <option value="Ivy" data-image="https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/people-avatar-icon-png.png">Ivy</option>
+    <option value="Joey" data-image="https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/770139_man_512x512.png">Joey</option>
+    <option value="Justin" data-image="https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/people-avatar-icon-png1.png">Justin</option>
   </select>
   
-  <button onclick="synthesizeSpeech()">Synthesize Speech</button>
+  <div class="button-container">
+    <button onclick="synthesizeSpeech()">Synthesize Speech</button>
+    <button onclick="generateRandomSentence()">Generate Random Sentence</button>
+  </div>
+  
   <audio controls id="audioPlayer" style="display: none;"></audio>
+  
+  <div id="speechContainer">
+    <img src="https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/PEOPLE_ICON-23-5121.png" alt="Speaking Image" id="voiceImage">
+    <div id="speechBubble">
+      <p id="speechText"></p>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
