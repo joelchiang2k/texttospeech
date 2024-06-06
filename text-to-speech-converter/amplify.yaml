@@ -1,0 +1,33 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - cd src
+        - npm install
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: src/build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - src/node_modules/**/*
+      - backend/node_modules/**/*
+backend:
+  phases:
+    preBuild:
+      commands:
+        - cd backend
+        - npm install
+    build:
+      commands:
+        - npm run build
+    postBuild:
+      commands:
+        - amplifyPush --simple
+  cache:
+    paths:
+      - backend/node_modules/**/*
