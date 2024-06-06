@@ -6,13 +6,13 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3000;
 
 console.log('Environment PORT:', process.env.PORT);
 console.log('Using PORT:', port);
 
 // Use cors middleware to enable CORS for specific domains
-const allowedOrigins = ['http://localhost:3000', 'http://text2speechs3bucket.s3-website-us-east-1.amazonaws.com/'];
+const allowedOrigins = ['http://localhost:3001', 'http://text2speechs3bucket.s3-website-us-east-1.amazonaws.com'];
 
 app.use(cors({
   origin: function (origin, callback) {

@@ -91,7 +91,7 @@ function App() {
       return;
     }
 
-    fetch('https://ec2-18-215-171-75.compute-1.amazonaws.com/synthesize', {
+    fetch('http://ec2-18-215-171-75.compute-1.amazonaws.com/synthesize', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
