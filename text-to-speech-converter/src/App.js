@@ -91,7 +91,7 @@ function App() {
       return;
     }
 
-    fetch('http://localhost:3001/synthesize', {
+    fetch('https://ec2-18-215-171-75.compute-1.amazonaws.com/synthesize', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
