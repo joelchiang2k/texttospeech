@@ -1,13 +1,22 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Container, Button, Typography, Box, IconButton, Slider, createTheme, ThemeProvider } from '@mui/material';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import PauseIcon from '@mui/icons-material/Pause';
-import RepeatIcon from '@mui/icons-material/Repeat';
-import SpeedIcon from '@mui/icons-material/Speed';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import useEmblaCarousel from 'embla-carousel-react';
-import './App.css'; // Ensure to import the CSS file
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import {
+  Container,
+  Button,
+  Typography,
+  Box,
+  IconButton,
+  Slider,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
+import RepeatIcon from "@mui/icons-material/Repeat";
+import SpeedIcon from "@mui/icons-material/Speed";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import useEmblaCarousel from "embla-carousel-react";
+import "./App.css"; // Ensure to import the CSS file
 
 const theme = createTheme({
   typography: {
@@ -28,33 +37,60 @@ const theme = createTheme({
 });
 
 function App() {
-  const [text, setText] = useState('');
-  const [voice, setVoice] = useState('Joanna');
-  const [audioURL, setAudioURL] = useState('');
+  const [text, setText] = useState("");
+  const [voice, setVoice] = useState("Joanna");
+  const [audioURL, setAudioURL] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
   const [isRepeating, setIsRepeating] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [showSlider, setShowSlider] = useState(false);
   const audioRef = useRef(null);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const voices = [
-    { name: 'Joanna', lang: 'en-US', image: 'https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/PEOPLE_ICON-23-5121.png' },
-    { name: 'Matthew', lang: 'en-US', image: 'https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/iconfinder-1-avatar-2754574_120513.png' },
-    { name: 'Ivy', lang: 'en-US', image: 'https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/people-avatar-icon-png.png' },
-    { name: 'Joey', lang: 'en-US', image: 'https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/770139_man_512x512.png' },
-    { name: 'Justin', lang: 'en-US', image: 'https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/people-avatar-icon-png1.png' },
+    {
+      name: "Joanna",
+      lang: "en-US",
+      image:
+        "https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/PEOPLE_ICON-23-5121.png",
+    },
+    {
+      name: "Matthew",
+      lang: "en-US",
+      image:
+        "https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/iconfinder-1-avatar-2754574_120513.png",
+    },
+    {
+      name: "Ivy",
+      lang: "en-US",
+      image:
+        "https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/people-avatar-icon-png.png",
+    },
+    {
+      name: "Joey",
+      lang: "en-US",
+      image:
+        "https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/770139_man_512x512.png",
+    },
+    {
+      name: "Justin",
+      lang: "en-US",
+      image:
+        "https://elasticbeanstalk-us-east-1-797064849441.s3.amazonaws.com/people-avatar-icon-png1.png",
+    },
   ];
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
-    const selectedIndex = emblaApi.selectedScrollSnap();
-    setVoice(voices[selectedIndex].name);
+    const index = emblaApi.selectedScrollSnap();
+    setSelectedIndex(index);
+    setVoice(voices[index].name);
   }, [emblaApi, voices]);
 
   useEffect(() => {
     if (!emblaApi) return;
-    emblaApi.on('select', onSelect);
+    emblaApi.on("select", onSelect);
   }, [emblaApi, onSelect]);
 
   useEffect(() => {
@@ -73,34 +109,34 @@ function App() {
         }
       };
 
-      audioElement.addEventListener('play', handlePlay);
-      audioElement.addEventListener('pause', handlePause);
-      audioElement.addEventListener('ended', handleEnded);
+      audioElement.addEventListener("play", handlePlay);
+      audioElement.addEventListener("pause", handlePause);
+      audioElement.addEventListener("ended", handleEnded);
 
       return () => {
-        audioElement.removeEventListener('play', handlePlay);
-        audioElement.removeEventListener('pause', handlePause);
-        audioElement.removeEventListener('ended', handleEnded);
+        audioElement.removeEventListener("play", handlePlay);
+        audioElement.removeEventListener("pause", handlePause);
+        audioElement.removeEventListener("ended", handleEnded);
       };
     }
   }, [audioURL, isRepeating, playbackRate]);
 
   const handlePlay = () => {
     if (!text) {
-      alert('Please enter text to synthesize.');
+      alert("Please enter text to synthesize.");
       return;
     }
 
-    fetch('http://ec2-18-215-171-75.compute-1.amazonaws.com/synthesize', {
-      method: 'POST',
+    fetch("http://ec2-18-215-171-75.compute-1.amazonaws.com/synthesize", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ text, voice }),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return response.blob();
       })
@@ -111,16 +147,18 @@ function App() {
         audioRef.current.play();
       })
       .catch((error) => {
-        console.error('Error:', error);
-        alert('Speech synthesis failed. Please try again.');
+        console.error("Error:", error);
+        alert("Speech synthesis failed. Please try again.");
       });
   };
 
   const handleGenerateRandomSentence = () => {
-    fetch('https://api.quotable.io/random')
+    fetch("https://api.quotable.io/random")
       .then((response) => response.json())
       .then((data) => setText(data.content))
-      .catch((error) => alert('Failed to fetch a random sentence. Please try again.'));
+      .catch((error) =>
+        alert("Failed to fetch a random sentence. Please try again.")
+      );
   };
 
   const handlePause = () => {
@@ -144,9 +182,15 @@ function App() {
     }
   };
 
+  const handleSpeakerClick = (index) => {
+    setSelectedIndex(index);
+    setVoice(voices[index].name);
+    if (emblaApi) emblaApi.scrollTo(index);
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth="sm" style={{ marginTop: '2rem' }}>
+      <Container maxWidth="sm" style={{ marginTop: "2rem" }}>
         <Typography variant="h4" gutterBottom>
           Text-To-Speech Converter
         </Typography>
@@ -165,20 +209,28 @@ function App() {
         </Box>
         <Box display="flex" justifyContent="center" marginBottom="1rem">
           <IconButton onClick={handlePlay}>
-            <PlayArrowIcon />
+            <PlayArrowIcon style={{ fontSize: 40 }} />
           </IconButton>
           <IconButton onClick={handlePause}>
-            <PauseIcon />
+            <PauseIcon style={{ fontSize: 40 }} />
           </IconButton>
-          <IconButton onClick={handleRepeat} color={isRepeating ? 'primary' : 'default'}>
-            <RepeatIcon />
+          <IconButton
+            onClick={handleRepeat}
+            color={isRepeating ? "primary" : "default"}
+          >
+            <RepeatIcon style={{ fontSize: 40 }} />
           </IconButton>
           <IconButton onClick={toggleSlider}>
-            <SpeedIcon />
+            <SpeedIcon style={{ fontSize: 40 }} />
           </IconButton>
         </Box>
         {showSlider && (
-          <Box display="flex" flexDirection="column" alignItems="center" marginBottom="1rem">
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            marginBottom="1rem"
+          >
             <Typography variant="body1">Speed: {playbackRate}x</Typography>
             <Slider
               value={playbackRate}
@@ -196,21 +248,35 @@ function App() {
         <Box className="carousel-container">
           <div className="embla" ref={emblaRef}>
             <div className="embla__container">
-              {voices.map((v) => (
-                <div key={v.name} className="embla__slide carousel-item">
-                  <div className="carousel-box">
+              {voices.map((v, index) => (
+                <div
+                  key={v.name}
+                  className={`embla__slide carousel-item ${
+                    index === selectedIndex ? "selected" : ""
+                  }`}
+                  onClick={() => handleSpeakerClick(index)}
+                >
+                  <div className={`carousel-box ${index === selectedIndex ? "selected" : ""}`}>
                     <img src={v.image} alt={v.name} className="carousel-image" />
-                    <Typography variant="body2" align="center">{v.name}</Typography>
+                    <Typography variant="body2" align="center">
+                      {v.name}
+                      </Typography>
                   </div>
                 </div>
               ))}
             </div>
           </div>
           <div className="embla__buttons-container">
-            <IconButton className="embla__button embla__button--prev" onClick={() => emblaApi && emblaApi.scrollPrev()}>
+            <IconButton
+              className="embla__button embla__button--prev"
+              onClick={() => emblaApi && emblaApi.scrollPrev()}
+            >
               <ChevronLeftIcon />
             </IconButton>
-            <IconButton className="embla__button embla__button--next" onClick={() => emblaApi && emblaApi.scrollNext()}>
+            <IconButton
+              className="embla__button embla__button--next"
+              onClick={() => emblaApi && emblaApi.scrollNext()}
+            >
               <ChevronRightIcon />
             </IconButton>
           </div>
@@ -218,24 +284,24 @@ function App() {
         <div className="speech-container">
           <div className="image-container">
             <img
-              src={voices.find((v) => v.name === voice).image}
+              src={voices[selectedIndex].image}
               alt={`${voice}`}
               className="speaker-image"
             />
-          </div>
-          {isPlaying && (
-            <div className="soundwave">
-              <div className="boxContainer">
-                <div className="box box1"></div>
-                <div className="box box2"></div>
-                <div className="box box3"></div>
-                <div className="box box4"></div>
-                <div className="box box5"></div>
+            {isPlaying && (
+              <div className="soundwave">
+                <div className="boxContainer">
+                  <div className="box box1"></div>
+                  <div className="box box2"></div>
+                  <div className="box box3"></div>
+                  <div className="box box4"></div>
+                  <div className="box box5"></div>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-        <audio ref={audioRef} style={{ display: 'none' }} />
+        <audio ref={audioRef} style={{ display: "none" }} />
       </Container>
     </ThemeProvider>
   );

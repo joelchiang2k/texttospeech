@@ -215,15 +215,59 @@ button, .MuiButton-root {
 }
 
 .carousel-box {
-  border: 2px solid #c0bfbf;
-  border-radius: 20px;
-  padding: 25px;
-  text-align: center;
+  border: 2px solid #c0bfbf;            /* Subtle border color */
+  border-radius: 20px;                  /* Smooth rounded corners */
+  padding: 30px;                        /* Ample padding inside the box */
+  text-align: center;                   /* Center-align text content */
+  background-color: #f8f8f8;            /* Light background color for contrast */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition effects */
+  display: flex;                        /* Flexbox for flexible alignment */
+  flex-direction: column;               /* Column layout for child elements */
+  align-items: center;                  /* Center child elements horizontally */
+  justify-content: center;              /* Center child elements vertically */
+  max-width: 125px;                     /* Increased maximum width */
+  width: 125px;
+  margin: 20px;                         /* Margin for spacing between items */
+  overflow: hidden;                     /* Hide overflow to keep rounded corners */
+}
+
+.carousel-box:hover {
+  transform: translateY(-10px);         /* Slight lift effect on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+  background-color: #eeeeee;
+}
+
+.carousel-box.selected {
+  border: 3px solid #00aabb;            /* Highlight border color for selected */
 }
 
 .carousel-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 80%;
-  margin-bottom: 10px;
+  width: 120px;                         /* Increased width for images */
+  height: 120px;                        /* Increased height for images */
+  border-radius: 50%;                   /* Make images circular */
+  margin-bottom: 20px;                  /* Space below the image */
+  object-fit: cover;                    /* Cover the entire image area */
+}
+
+.carousel-content {
+  margin-top: 10px;                     /* Space above the content */
+  color: #333;                          /* Dark text color */
+  font-size: 18px;                      /* Slightly larger text */
+  font-weight: bold;                    /* Bold text for emphasis */
+  line-height: 1.5;                     /* Improved line spacing */
+}
+
+.carousel-box-title {
+  font-size: 22px;                      /* Larger font size for titles */
+  font-weight: 600;                     /* Semi-bold weight for titles */
+  color: #444;                          /* Dark gray color for titles */
+  margin-bottom: 10px;                  /* Space below the title */
+}
+
+.carousel-box-description {
+  font-size: 16px;                      /* Standard font size for descriptions */
+  color: #666;                          /* Medium gray color for descriptions */
+  margin-top: 0;                        /* Remove margin above the description */
+  margin-bottom: 15px;                  /* Space below the description */
 }
