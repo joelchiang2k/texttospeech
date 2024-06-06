@@ -15,7 +15,7 @@ This is a simple text-to-speech converter implemented using the AWS Polly servic
 
 
 ### Demo
-Go to http://text2speechs3bucket.s3-website-us-east-1.amazonaws.com/ to try it out.
+Go to http://text2speeches.com/ to try it out.
 
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
