@@ -13,7 +13,7 @@ console.log('Using PORT:', port);
 
 // Use cors middleware to enable CORS for specific domains
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://text2speeches.com/');
+  res.setHeader('Access-Control-Allow-Origin', 'http://text2speeches.com');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
