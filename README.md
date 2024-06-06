@@ -14,11 +14,8 @@ This is a simple text-to-speech converter implemented using the AWS Polly servic
 - AWS IAM credentials configured on your local environment or deployment environment.
 
 
-### Installation
-1. Clone this repository to your local machine
-2. Install dependencies: npm install
-3. Run "node server.js" to start the backend.
-4. Go to localhost:3000 and try it out.
+### Demo
+Go to http://text2speechs3bucket.s3-website-us-east-1.amazonaws.com/ to try it out.
 
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
