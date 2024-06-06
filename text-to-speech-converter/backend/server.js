@@ -12,19 +12,13 @@ console.log('Environment PORT:', process.env.PORT);
 console.log('Using PORT:', port);
 
 // Use cors middleware to enable CORS for specific domains
-const allowedOrigins = ['http://localhost:3001', 'http://text2speechs3bucket.s3-website-us-east-1.amazonaws.com'];
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://text2speechs3bucket.s3-website-us-east-1.amazonaws.com');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  }
-}));
 console.log(process.env.ACCESS_KEY_ID)
 console.log(process.env.SECRET_ACCESS_KEY)
 // Configure AWS credentials and Polly
