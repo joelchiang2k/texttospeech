@@ -1,6 +1,7 @@
 # Ignore environment variable files
 .env
 *.env
+/backend/.env
 **/.env
 .env.local
 .env.development.local
