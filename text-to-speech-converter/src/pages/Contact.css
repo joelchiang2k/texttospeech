@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800');
+
+.contact-container {
+  max-width: 600px;
+  margin-top: 2rem;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 32px; 
+}
+
+.contact-content {
+  font-weight: 400;
+  font-size: 20px; 
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-field {
+  margin-bottom: 1rem;
+}
+
+.contact-button {
+  font-family: 'Dosis', sans-serif;
+  margin-top: 1rem;
+}
