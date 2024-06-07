@@ -171,9 +171,6 @@ function Home() {
 
   return (
     <Container maxWidth="sm" style={{ marginTop: "2rem" }}>
-      <Typography variant="h4" gutterBottom>
-        Start Typing...
-      </Typography>
       <Box className="text-box">
         <textarea
           value={text}

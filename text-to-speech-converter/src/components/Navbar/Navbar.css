@@ -20,7 +20,7 @@ html, body {
   left: 0;
   background-color: white; /* Ensure background color to avoid transparency issues */
   z-index: 1000; /* Ensure the navbar stays above other content */
-  padding: 10px 20px;
+  padding: 10px px;
 }
 
 .logo {
