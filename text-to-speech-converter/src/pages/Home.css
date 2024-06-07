@@ -399,9 +399,9 @@ button, .MuiButton-root {
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 390px) {
   .text-box {
-    margin-top: 100%;
+    margin-top: 120%;
     height: auto;
   }
 
