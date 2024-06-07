@@ -63,3 +63,34 @@ html, body {
   opacity: 1;
   bottom: 5px;
 }
+
+.menu-icon {
+  display: none;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .logo span {
+    display: none;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Adjust this based on your header height */
+    right: 20px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu.open {
+    display: flex;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+}
